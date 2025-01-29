@@ -1,20 +1,28 @@
-import * as React from "react"
-import Autoplay from "embla-carousel-autoplay"
-
-import { Card, CardContent } from "@/components/ui/card"
+import * as React from "react";
+import Autoplay from "embla-carousel-autoplay";
+import { useEffect, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
+import { getMovieData } from "@/app/utils/getMovies";
 
 export function NowPlaying() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
-  )
+  const dataFunction = async()=>{
+    const data =  await getMovieData();
+    console.log(data);
+  }
+  
+  useEffect( () => {
+    dataFunction()
+    
+  }, []);
 
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   return (
     <Carousel
       plugins={[plugin.current]}
@@ -27,8 +35,8 @@ export function NowPlaying() {
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+                <CardContent className="flex w-full aspect-square items-center justify-center p-6">
+                  <div></div>
                 </CardContent>
               </Card>
             </div>
@@ -38,5 +46,5 @@ export function NowPlaying() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-  )
+  );
 }
