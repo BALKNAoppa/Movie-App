@@ -36,7 +36,9 @@ export function NowPlaying() {
             <div className="p-1">
               <Card>
                 <CardContent className="flex w-full aspect-square items-center justify-center p-6">
-                  <div></div>
+                  <div>
+                    TEST
+                  </div>
                 </CardContent>
               </Card>
             </div>
