@@ -16,7 +16,10 @@ import { Button } from "../ui/button";
 export function NowPlaying() {
   const dataFunction = async () => {
     const data = await getMovieData();
-    console.log(data);
+    console.log("Now playing dotorh", data);
+  };
+
+  const NowPlayingData = {
   };
 
   useEffect(() => {
