@@ -10,17 +10,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { getMovieData } from "@/app/utils/getMovies";
+import { getMovieData } from "@/utils/getMovies";
 import { Button } from "../ui/button";
 
 export function NowPlaying() {
   const dataFunction = async () => {
-    const data = await getMovieData();
-    console.log("Now playing dotorh", data);
+    const movies = await getMovieData("now_playing");
+    console.log("Now playing dotorh ts", movies);
   };
-
-  const NowPlayingData = {
-  };
+  
 
   useEffect(() => {
     dataFunction();

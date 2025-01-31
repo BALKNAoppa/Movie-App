@@ -5,8 +5,8 @@ const Footer = () => {
     <div className="w-full px-4 sm:px-6 lg:px-8 py-10 flex justify-center gap-12 bg-indigo-700">
       <div className="flex flex-col items-start gap-[28px] flex-[1_0_0]">
         <div className="flex flex-col items-start gap-10 self-stretch">
-          <div className="flex flex-col items-start gap-3 color-[#FAFAFA]">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col items-start gap-3">
+            <div className="flex items-center gap-2 text-[#FAFAFA]">
               <Film className="w-5 h-5" />
               <h4 className="font-bold italic">Movie Z</h4>
             </div>
