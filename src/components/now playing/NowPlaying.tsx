@@ -35,8 +35,8 @@ export function NowPlaying() {
   useEffect(() => {
     const dataFunction = async () => {
       const movieList = await getMovieData("now_playing");
-      console.log("Full API Response:", movieList); // Logs entire API response
-      setMovies(movieList.results); // Store all movies
+      console.log("ALL RESPONCES", movieList);
+      setMovies(movieList.results);
     };
     dataFunction();
   }, []);
@@ -45,7 +45,7 @@ export function NowPlaying() {
     <div className="flex justify-center">
       <Carousel
         plugins={[plugin.current]}
-        className="w-full max-w-xs"
+        className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
@@ -53,7 +53,7 @@ export function NowPlaying() {
           {movies.map((movie) => (
             <CarouselItem key={movie.id}>
               <div className="p-1">
-                <div className="flex w-[375px] flex-col items-center gap-0 flex-shrink-0 self-stretch">
+                <div className="flex w-full sm:w-[375px] flex-col items-center gap-0 flex-shrink-0 self-stretch">
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
                     alt={movie.title}
@@ -62,23 +62,23 @@ export function NowPlaying() {
                     height={200}
                   />
                   <div className="flex flex-col items-start gap-[16px] self-stretch p-[var(--spacing-5, 20px)]">
-                    <div className="flex items-start gap-[var(--spacing-0, 0px)] self-stretch">
+                    <div className="flex items-start gap-[var(--spacing-0, 0px)] flex-col sm:flex-row">
                       <div className="flex flex-col items-start flex-1">
-                        <p className=" self-stretch font-inter text-sm font-normal leading-[20px]">
-                          Now Playing: {movie.title}
+                        <p className="self-stretch font-inter text-sm font-normal leading-[20px]">
+                          Now Playing:
                         </p>
                         <p className="font-inter text-[24px] font-semibold leading-[32px] tracking-[-0.6px]">
                           {movie.title}
                         </p>
                       </div>
-                      <div className="w-[83px] h-[48px]">
-                        <div className="flex w-[83px] h-[48px] items-center gap-[4px] flex-shrink-0">
-                          <div className="flex pt-[var(--spacing-2, 8px)] items-start gap-[10px] self-stretch">
+                      <div className="w-full sm:w-[83px] h-[48px] sm:h-[48px]">
+                        <div className="flex w-full sm:w-[83px] h-[48px] items-center gap-[4px] flex-shrink-0">
+                          <div className="flex pt-[var(--spacing-2, 8px)] items-start gap-[10px]">
                             <Star />
                           </div>
                           <div className="flex flex-col items-start">
                             <p className="font-inter text-lg font-semibold leading-[28px]">
-                            {movie.vote_average}
+                              {movie.vote_average}
                               <span className="text-[#71717A] font-inter text-base font-normal leading-[24px]">
                                 /10
                               </span>
@@ -87,8 +87,8 @@ export function NowPlaying() {
                         </div>
                       </div>
                     </div>
-                    <p>{movie.overview}</p>
-                    <Button>
+                    <p className="text-sm sm:text-base">{movie.overview}</p>
+                    <Button className="w-full sm:w-auto">
                       <Play />
                       Watch Trailer
                     </Button>
