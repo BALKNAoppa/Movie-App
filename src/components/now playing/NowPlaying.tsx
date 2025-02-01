@@ -49,7 +49,7 @@ export function NowPlaying() {
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
-        <CarouselContent>
+        <CarouselContent className="">
           {movies.map((movie) => (
             <CarouselItem key={movie.id}>
               <div className="p-1">
