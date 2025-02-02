@@ -57,7 +57,7 @@ export function NowPlaying() {
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
                     alt={movie.title}
-                    className="w-full h-[200px] object-cover rounded-lg"
+                    className="w-full h-[600px] object-cover rounded-lg"
                     width={500}
                     height={200}
                   />
