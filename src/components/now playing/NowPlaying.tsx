@@ -45,7 +45,7 @@ export function NowPlaying() {
     <div className="flex justify-center">
       <Carousel
         plugins={[plugin.current]}
-        className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl"
+        className="w-full"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
@@ -53,7 +53,7 @@ export function NowPlaying() {
           {movies.map((movie) => (
             <CarouselItem key={movie.id}>
               <div className="p-1">
-                <div className="flex w-full sm:w-[375px] flex-col items-center gap-0 flex-shrink-0 self-stretch">
+                <div className="flex w-full flex-col items-center gap-0 flex-shrink-0 self-stretch">
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
                     alt={movie.title}
