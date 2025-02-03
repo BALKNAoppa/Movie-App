@@ -57,13 +57,13 @@ export function NowPlaying() {
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
                     alt={movie.title}
-                    className="w-full h-[600px] object-cover rounded-lg"
+                    className="w-full object-cover rounded-lg"
                     width={500}
                     height={200}
                   />
                   <div className="flex flex-col items-start gap-[16px] self-stretch p-[var(--spacing-5, 20px)]">
-                    <div className="flex items-start gap-[var(--spacing-0, 0px)] flex-col sm:flex-row">
-                      <div className="flex flex-col items-start flex-1">
+                    <div className="flex items-start  sm:flex-row">
+                      <div className="flex flex-col items-start flex-1 w-[252px]">
                         <p className="self-stretch font-inter text-sm font-normal leading-[20px]">
                           Now Playing:
                         </p>
