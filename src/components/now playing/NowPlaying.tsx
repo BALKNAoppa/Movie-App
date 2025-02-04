@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { getMovieData } from "@/utils/getMovies";
 import { Button } from "../ui/button";
-import Image from "next/image";
+import Image from "next/legacy/image"
 
 export function NowPlaying() {
   type Movie = {
@@ -45,61 +45,61 @@ export function NowPlaying() {
     <div className="flex justify-center">
       <Carousel
         plugins={[plugin.current]}
-        className="w-full"
+        className="w-full relative"
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
       >
         <CarouselContent className="">
           {movies.map((movie) => (
             <CarouselItem key={movie.id}>
-              <div className="p-1">
-                <div className="flex w-full flex-col items-center gap-0 flex-shrink-0 self-stretch">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-                    alt={movie.title}
-                    className="w-full object-cover rounded-lg"
-                    width={500}
-                    height={200}
-                  />
-                  <div className="flex flex-col items-start gap-[16px] self-stretch p-[var(--spacing-5, 20px)]">
-                    <div className="flex items-start  sm:flex-row">
-                      <div className="flex flex-col items-start flex-1 w-[252px]">
-                        <p className="self-stretch font-inter text-sm font-normal leading-[20px]">
-                          Now Playing:
-                        </p>
-                        <p className="font-inter text-[24px] font-semibold leading-[32px] tracking-[-0.6px]">
-                          {movie.title}
-                        </p>
-                      </div>
-                      <div className="w-full sm:w-[83px] h-[48px] sm:h-[48px]">
-                        <div className="flex w-full sm:w-[83px] h-[48px] items-center gap-[4px] flex-shrink-0">
-                          <div className="flex pt-[var(--spacing-2, 8px)] items-start gap-[10px]">
-                            <Star />
-                          </div>
-                          <div className="flex flex-col items-start">
-                            <p className="font-inter text-lg font-semibold leading-[28px]">
-                              {movie.vote_average}
-                              <span className="text-[#71717A] font-inter text-base font-normal leading-[24px]">
-                                /10
-                              </span>
-                            </p>
-                          </div>
+              <div className="relative mt-6">
+                  <a>
+                    <div className="relative overflow-hidden h-[150px] lg:h-[600px]">
+                      <span className="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
+                        <Image
+                          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                          alt={movie.title}
+                          objectFit="cover"
+                          layout="fill"
+                        />
+                      </span>
+                      <div className="absolute inset-0 z-10 transition-all duration-300 group-hover:bg-primary/30"></div>
+                    </div>
+                  </a>
+                  <div className="static text-foreground lg:absolute lg:top-1/2 lg:left-[140px] lg:-translate-y-1/2 lg:text-white z-10">
+                    <div className="p-5 space-y-4 lg:p-0">
+                      <div className="flex justify-between lg:flex-col lg:space-y-1">
+                        <div>
+                          <p>Now Playing:</p>
+                          <p className="font-inter text-[24px] font-semibold leading-[32px] tracking-[-0.6px]">
+                            {movie.title}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-x-1">
+                          <Star className="fill-[#fde047] stroke-[#fde047]" />
+                          <p className="font-medium">
+                            {movie.vote_average}
+                            <span className="text-[#71717A] font-inter text-base font-normal leading-[24px]">
+                              /10
+                            </span>
+                          </p>
                         </div>
                       </div>
+                      <p className="w-[302px] text-sm line-clamp-5 text-justify">
+                        {movie.overview}
+                      </p>
+                      <Button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 h-9 px-4 py-2 mt-4">
+                        <Play />
+                        Watch Trailer
+                      </Button>
                     </div>
-                    <p className="text-sm sm:text-base">{movie.overview}</p>
-                    <Button className="w-full sm:w-auto">
-                      <Play />
-                      Watch Trailer
-                    </Button>
                   </div>
-                </div>
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="absolute max-lg:hidden left-[44px] top-[330px]"/>
+        <CarouselNext className="absolute max-lg:hidden right-[44px] top-[330px]"/>
       </Carousel>
     </div>
   );

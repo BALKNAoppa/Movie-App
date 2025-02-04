@@ -32,8 +32,9 @@ export function UpComing() {
     dataFunction();
   }, []);
   return (
-    <div className="flex justify-center">
-      <Card/>
+    <div className="">
+        <div></div>
+        <div></div>
     </div>
   );
 }
