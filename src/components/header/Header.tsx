@@ -28,7 +28,7 @@ const Header = () => {
         <div className="w-[97px] h-[36px] max-lg:hidden">
           <div className="relative w-full">
         <Select>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger>
             <SelectValue placeholder="Genre" />
           </SelectTrigger>
           <SelectContent>

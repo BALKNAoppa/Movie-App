@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const TMDB_BASE_URL = process.env.TMDB_BASE_URL;
+const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
 
 export const getMovieData = async (category: string) => {
@@ -9,6 +9,7 @@ export const getMovieData = async (category: string) => {
       `${TMDB_BASE_URL}/movie/${category}?language=en-US&page=1`,
       {
         headers: {
+          Accept: "application/json",
           Authorization: `Bearer ${TMDB_API_TOKEN}`,
         },
       }
