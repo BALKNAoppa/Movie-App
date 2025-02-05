@@ -51,7 +51,7 @@ export function UpComing() {
             >
               <a
                 className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
-                href=""
+                href="/category/Upcoming"
               >
                 <div className="overflow-hidden relative w-[157.5px] h-[234px] lg:w-[230px] lg:h-[340px]">
                   <Image
