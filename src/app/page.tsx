@@ -2,13 +2,17 @@
 
 import { NowPlaying } from "@/components/now playing/NowPlaying";
 import { UpComing } from "@/components/Upcoming/UpComing";
+import { Popular } from "@/components/Popular/Popular";
+import { TopRated } from "@/components/Top Rated/TopRated";
 
 export default function Home() {
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen">
       <div className="mt-14">
         <NowPlaying />
         <UpComing/>
+        <Popular/>
+        <TopRated/>
       </div>
     </div>
   );

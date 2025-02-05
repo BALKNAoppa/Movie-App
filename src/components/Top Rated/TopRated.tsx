@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-export function UpComing() {
+export function TopRated() {
   type Movie = {
     adult: boolean;
     backdrop_path: string;
@@ -26,7 +26,7 @@ export function UpComing() {
   const [movies, setMovies] = useState<Movie[]>([]);
   useEffect(() => {
     const dataFunction = async () => {
-      const movieList = await getMovieData("upcoming");
+      const movieList = await getMovieData("top_rated");
       console.log("ALL RESPONCES FOR UPCOMING", movieList);
       setMovies(movieList.results);
     };
@@ -37,7 +37,7 @@ export function UpComing() {
     <div className="max-w-[1440px] mx-auto px-[20px] mt-[52px] font-inter">
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
+          <h3 className="text-foreground text-2xl font-semibold">Top Rated</h3>
           <a className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary underline-offset-4 hover:underline h-9 px-4 py-2">
             See more
             <ArrowRight />
