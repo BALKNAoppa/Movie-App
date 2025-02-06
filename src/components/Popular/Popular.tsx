@@ -4,6 +4,7 @@ import { getMovieData } from "@/utils/getMovies";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Star } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function Popular() {
   type Movie = {
@@ -32,6 +33,7 @@ export function Popular() {
     };
     dataFunction();
   }, []);
+  const { push } = useRouter();
 
   return (
     <div className="max-w-[1440px] mx-auto px-[20px] mt-[52px] font-inter">
@@ -48,13 +50,13 @@ export function Popular() {
             <div key={movie.id} className="flex flex-wrap rounded-md">
               <a
                 className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
-                href=""
               >
                 <div className="overflow-hidden relative w-[157.5px] h-[234px] lg:w-[230px] lg:h-[340px]">
                   <Image
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     alt={movie.title}
                     layout="fill"
+                    onClick={() => push("detail/${id}")}
                     className="absolute inset-0 box-border p-0 border-none m-auto block w-0 h-0 min-w-full max-w-full min-h-full max-h-full object-cover"
                   />
                 </div>

@@ -1,9 +1,9 @@
 "use client";
 
-export default function Home() {
+export default function DetailsHome() {
   return (
     <div className="w-screen">
-      detail test
+      teeeest
     </div>
   );
 }

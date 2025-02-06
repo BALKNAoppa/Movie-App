@@ -12,8 +12,10 @@ import {
 import { getMovieData } from "@/utils/getMovies";
 import { Button } from "../ui/button";
 import Image from "next/legacy/image";
+import { useRouter } from "next/navigation";
 
 export function NowPlaying() {
+  const { push } = useRouter();
   type Movie = {
     adult: boolean;
     backdrop_path: string;
@@ -51,7 +53,7 @@ export function NowPlaying() {
       >
         <CarouselContent>
           {movies.map((movie) => (
-            <CarouselItem key={movie.id}>
+            <CarouselItem key={movie.id} onClick={() => push("detail/${id}")}>
               <div className="relative mt-6">
                 <a>
                   <div className="relative overflow-hidden h-[280px] lg:h-[600px]">

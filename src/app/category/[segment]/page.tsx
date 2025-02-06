@@ -1,5 +1,7 @@
 "use client";
 
+// Category segment-р нь ялгаж харуулж байгаа page
+
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
