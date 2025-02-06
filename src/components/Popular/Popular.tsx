@@ -56,7 +56,7 @@ export function Popular() {
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     alt={movie.title}
                     layout="fill"
-                    onClick={() => push("detail/${id}")}
+                    onClick={() => push(`detail/${movie.id}`)}
                     className="absolute inset-0 box-border p-0 border-none m-auto block w-0 h-0 min-w-full max-w-full min-h-full max-h-full object-cover"
                   />
                 </div>

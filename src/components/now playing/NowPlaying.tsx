@@ -53,10 +53,9 @@ export function NowPlaying() {
       >
         <CarouselContent>
           {movies.map((movie) => (
-            <CarouselItem key={movie.id} onClick={() => push("detail/${id}")}>
+            <CarouselItem key={movie.id}>
               <div className="relative mt-6">
-                <a>
-                  <div className="relative overflow-hidden h-[280px] lg:h-[600px]">
+                  <div className="relative overflow-hidden h-[280px] lg:h-[600px]" onClick={() => push(`detail/${movie.id}`)} >
                     <span className="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
                       <Image
                         src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
@@ -67,7 +66,6 @@ export function NowPlaying() {
                     </span>
                     <div className="absolute inset-0 z-10 transition-all duration-300 group-hover:bg-primary/30"></div>
                   </div>
-                </a>
                 <div className="static text-foreground lg:absolute lg:top-1/2 lg:left-[140px] lg:-translate-y-1/2 lg:text-white z-10">
                   <div className="p-5 space-y-4 lg:p-0">
                     <div className="flex justify-between lg:flex-col lg:space-y-1">
@@ -90,7 +88,7 @@ export function NowPlaying() {
                     <p className="w-full lg:w-[400px] line-clamp-5 text-justify">
                       {movie.overview}
                     </p>
-                    <Button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 h-9 px-4 py-2 mt-4">
+                    <Button className="inline-flex items-center bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 justify-center gap-2 h-9 px-4 py-2 mt-4">
                       <Play />
                       Watch Trailer
                     </Button>
