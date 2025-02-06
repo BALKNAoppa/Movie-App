@@ -9,7 +9,6 @@ console.log(params);
   
   return (
     <div className="w-screen">
-      teeeest
     </div>
   );
 }
