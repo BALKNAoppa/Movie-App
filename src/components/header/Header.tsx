@@ -18,7 +18,7 @@ import {
 const Header = () => {
   const { setTheme, theme } = useTheme();
   return (
-    <div className="fixed top-0 inset-x-0 z-20 h-[59px] bg-background flex items-center justify-center">
+    <div className=" inset-x-0 h-[59px] bg-background flex items-center justify-center">
       <div className="flex items-center justify-between w-full max-w-screen-xl px-5 lg:px-0">
         <div className="flex items-center gap-x-2 text-indigo-700">
           <Film className="w-5 h-5" />

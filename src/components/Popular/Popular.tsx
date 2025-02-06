@@ -38,17 +38,14 @@ export function Popular() {
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <h3 className="text-foreground text-2xl font-semibold">Popular</h3>
-          <a className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary underline-offset-4 hover:underline h-9 px-4 py-2">
+          <a className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline h-9 px-4 py-2" href="/category/popular">
             See more
             <ArrowRight />
           </a>
         </div>
         <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
           {movies.slice(0, 10).map((movie) => (
-            <div
-              key={movie.id}
-              className="flex flex-wrap rounded-md"
-            >
+            <div key={movie.id} className="flex flex-wrap rounded-md">
               <a
                 className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
                 href=""
