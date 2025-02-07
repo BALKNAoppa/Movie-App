@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { getCategoryMovieData } from "@/utils/getCategoryMovies";
-import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { segment } = useParams();
@@ -40,7 +40,11 @@ export default function Home() {
   }, [segment]);
 
   const formattedSegment =
-      typeof segment === "string" ? segment.charAt(0).toUpperCase() + segment.slice(1) : "";
+    typeof segment === "string"
+      ? segment.charAt(0).toUpperCase() + segment.slice(1)
+      : "";
+
+  const { push } = useRouter();
 
   return (
     <div className="w-full">
@@ -54,9 +58,8 @@ export default function Home() {
           <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
             {movies?.map((movie) => (
               <div key={movie.id} className="flex flex-wrap rounded-md">
-                <Link
+                <a
                   className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
-                  href=""
                 >
                   <div className="overflow-hidden relative w-[157.5px] h-[234px] lg:w-[230px] lg:h-[340px]">
                     <Image
@@ -64,6 +67,7 @@ export default function Home() {
                       alt={movie.title}
                       layout="fill"
                       className="absolute inset-0 box-border p-0 border-none m-auto block w-0 h-0 min-w-full max-w-full min-h-full max-h-full object-cover"
+                      onClick={() => push(`/detail/${movie.id}`)}
                     />
                   </div>
                   <div className="p-2">
@@ -82,7 +86,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                </Link>
+                </a>
               </div>
             ))}
           </div>

@@ -48,9 +48,12 @@ export function Popular() {
         </div>
         <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
           {movies.slice(0, 10).map((movie) => (
-            <div key={movie.id} className="flex flex-wrap rounded-md">
-              <Link
-                className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px" href=""
+            <div
+              key={movie.id}
+              className="flex flex-wrap rounded-md"
+            >
+              <a
+                className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
               >
                 <div className="overflow-hidden relative w-[157.5px] h-[234px] lg:w-[230px] lg:h-[340px]">
                   <Image
@@ -77,7 +80,7 @@ export function Popular() {
                     </p>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
           ))}
         </div>
