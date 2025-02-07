@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 export function UpComing() {
   type Movie = {
@@ -40,10 +41,10 @@ export function UpComing() {
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
-          <a className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline h-9 px-4 py-2" href="/category/upcoming">
+          <Link className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline h-9 px-4 py-2" href="/category/upcoming">
             See more
             <ArrowRight />
-          </a>
+          </Link>
         </div>
         <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
           {movies.slice(0, 10).map((movie) => (

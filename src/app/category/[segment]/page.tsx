@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { getCategoryMovieData } from "@/utils/getCategoryMovies";
+import Link from 'next/link';
 
 export default function Home() {
   const { segment } = useParams();
@@ -53,7 +54,7 @@ export default function Home() {
           <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
             {movies?.map((movie) => (
               <div key={movie.id} className="flex flex-wrap rounded-md">
-                <a
+                <Link
                   className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
                   href=""
                 >
@@ -81,7 +82,7 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
