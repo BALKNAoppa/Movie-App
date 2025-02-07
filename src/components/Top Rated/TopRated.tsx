@@ -4,6 +4,8 @@ import { getMovieData } from "@/utils/getMovies";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Star } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 export function TopRated() {
   type Movie = {
@@ -32,32 +34,33 @@ export function TopRated() {
     };
     dataFunction();
   }, []);
+  const { push } = useRouter();
 
   return (
     <div className="max-w-[1440px] mx-auto px-[20px] mt-[52px] font-inter">
       <div className="space-y-8">
         <div className="flex items-center justify-between">
           <h3 className="text-foreground text-2xl font-semibold">Top Rated</h3>
-          <a className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary underline-offset-4 hover:underline h-9 px-4 py-2">
+          <Link className="inline-flex items-center justify-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline h-9 px-4 py-2" href="/category/top_rated">
             See more
             <ArrowRight />
-          </a>
+          </Link>
         </div>
         <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
           {movies.slice(0, 10).map((movie) => (
             <div
               key={movie.id}
-              className="flex flex-wrap rounded-md"
+              className="flex flex-wrap rounded-md cursor-pointer"
             >
               <a
                 className="group w-[157.5px] overflow-hidden rounded-lg bg-secondary space-y-1 lg:w-[230px]"
-                href=""
               >
                 <div className="overflow-hidden relative w-[157.5px] h-[234px] lg:w-[230px] lg:h-[340px]">
                   <Image
                     src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     alt={movie.title}
                     layout="fill"
+                    onClick={() => push(`/detail/${movie.id}`)}
                     className="absolute inset-0 box-border p-0 border-none m-auto block w-0 h-0 min-w-full max-w-full min-h-full max-h-full object-cover"
                   />
                 </div>

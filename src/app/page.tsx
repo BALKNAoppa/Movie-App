@@ -8,7 +8,7 @@ import { TopRated } from "@/components/Top Rated/TopRated";
 export default function Home() {
   return (
     <div className="w-screen">
-      <div className="mt-14">
+      <div>
         <NowPlaying />
         <UpComing/>
         <Popular/>
