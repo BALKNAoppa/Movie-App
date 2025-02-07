@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { getMovieDetail } from "@/utils/getMovieDetail";
+import { getTraillerData } from "@/utils/geTraillerData";
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
 // import Image from "next/image";
@@ -26,6 +27,7 @@ export default function Page() {
   };
 
   const [movies, setMovies] = useState<Movie>();
+  const [trailerDetails, setTrailerDetails] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     const dataFunction = async () => {
@@ -36,6 +38,16 @@ export default function Page() {
     };
     dataFunction();
   }, [id]);
+
+  useEffect(() => {
+    const dataFunction = async () => {
+      const trailerDetails = await getTraillerData(Number(id));
+      console.log("ALL RESPONSES FOR TRAILER", trailerDetails);
+      setTrailerDetails(trailerDetails);
+    };
+    dataFunction();
+  }, [id]);
+
 
   function formatRuntime(runtime: number): string {
     const hours = Math.floor(runtime / 60);
@@ -67,7 +79,7 @@ export default function Page() {
                 <Star className="fill-[#fde047] w-[28px] h-[28px] stroke-[#fde047]" />
                 <div>
                   <p className="font-inter text-foreground text-sm">
-                    {movies.vote_average.toFixed(1)}
+                    {movies?.vote_average.toFixed(1)}
                     <span className="text-[#71717A] text-muted-foreground text-xs">
                       /10
                     </span>
