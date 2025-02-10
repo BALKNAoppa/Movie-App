@@ -47,7 +47,7 @@ export function UpComing() {
           </Link>
         </div>
         <div className="mt-8 px-4 flex flex-wrap gap-5 lg:gap-8">
-          {movies.slice(0, 10).map((movie) => (
+          {movies.  slice(0, 10).map((movie) => (
             <div
               key={movie.id}
               className="flex flex-wrap rounded-md cursor-pointer"

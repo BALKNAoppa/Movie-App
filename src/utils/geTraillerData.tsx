@@ -14,6 +14,8 @@ export const getTraillerData = async (movieId: number) => {
         },
       }
     );
+    console.log("TEEEST",response);
+    
     return response.data;
   } catch (error) {
     console.log("Axios Error shuu", error);
