@@ -5,7 +5,7 @@ import { getMovieDetail } from "@/utils/getMovieDetail";
 import { getTraillerData } from "@/utils/geTraillerData";
 import { useEffect, useState } from "react";
 import { Star } from "lucide-react";
-// import Image from "next/image";
+
 
 export default function Page() {
   type Movie = {
@@ -29,22 +29,21 @@ export default function Page() {
   const [movies, setMovies] = useState<Movie>();
   const [trailerDetails, setTrailerDetails] = useState(null);
   const { id } = useParams();
-  useEffect(() => {
-    const dataFunction = async () => {
-      const movieList = await getMovieDetail(Number(id));
-      console.log("ALL RESPONSES FOR DETAILS", movieList);
-      console.log("ALL RESPONSES FOR DETAILS", movieList.id);
-      setMovies(movieList);
-    };
-    dataFunction();
-  }, [id]);
+  
+  const dataFunction = async () => {
+    const movieList = await getMovieDetail(Number(id));
+    console.log("ALL RESPONSES FOR DETAILS", movieList.id);
+    setMovies(movieList);
+  };
 
+  const TrailerDataFunction = async () => {
+    const trailerDetails = await getTraillerData(Number(id));
+    console.log("ALL RESPONSES FOR TRAILER", trailerDetails);
+    setTrailerDetails(trailerDetails);
+  };
+  
   useEffect(() => {
-    const dataFunction = async () => {
-      const trailerDetails = await getTraillerData(Number(id));
-      console.log("ALL RESPONSES FOR TRAILER", trailerDetails);
-      setTrailerDetails(trailerDetails);
-    };
+    TrailerDataFunction();
     dataFunction();
   }, [id]);
 

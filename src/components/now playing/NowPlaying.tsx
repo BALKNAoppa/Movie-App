@@ -54,7 +54,7 @@ export function NowPlaying() {
   const fetchTrailer = async (movieId: number) => {
     const trailerDetails = await getTraillerData(movieId);
     if (trailerDetails && trailerDetails.results.length > 0) {
-      setTrailerKey(trailerDetails.results[0].key);
+      setTrailerKey(trailerDetails.results[0  ].key);
     }
   };
   console.log("test", getTraillerData);
