@@ -43,14 +43,11 @@ export function NowPlaying() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [trailerKey, setTrailerKey] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      const movieList = await getMovieData("now_playing");
-      setMovies(movieList.results);
-    };
-    fetchMovies();
-  }, []);
-
+  const fetchMovies = async () => {
+    const movieList = await getMovieData("now_playing");
+    setMovies(movieList.results);
+  };
+  fetchMovies();
   const fetchTrailer = async (movieId: number) => {
     const trailerDetails = await getTraillerData(movieId);
     if (trailerDetails && trailerDetails.results.length > 0) {
@@ -58,6 +55,9 @@ export function NowPlaying() {
     }
   };
   console.log("test", getTraillerData);
+  
+  useEffect(() => {
+  }, []);
   
 
   const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
