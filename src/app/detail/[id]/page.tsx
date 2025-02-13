@@ -5,10 +5,12 @@ import { getMovieDetail } from "@/utils/getMovieDetail";
 import { getTraillerData } from "@/utils/geTraillerData";
 import { getDirectorDetails } from "@/utils/getDirectorDetails";
 import { useEffect, useState } from "react";
+import { getSimilarMovie } from "@/utils/getSimilarMovie";
 import { Star, Play } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Similar } from "@/components/similar movie/SimilarMovie";
 import {
   Dialog,
   DialogContent,
@@ -32,21 +34,29 @@ type Movie = {
   vote_average: number;
   vote_count: number;
   runtime: number;
-  crew: { 
-    name: string 
-    }[];
+  crew: {
+    department: string;
+    job: string;
+    name: string;
+  }[];
+  cast: {
+    known_for_department: string;
+    department: string;
+    job: string;
+    name: string;
+  }[];
 };
 
 export default function Page() {
   const { push } = useRouter();
   const { id } = useParams();
-  const [movies, setMovies] = useState<Movie>();
+  const [movies, setMovies] = useState<Movie>({} as Movie);
+  const [similar, setSimilar] = useState<Movie[]>([]);
   const [trailerKey, setTrailerKey] = useState<string | null>(null);
   const [directorDetail, setDirectorDetail] = useState<Movie>();
 
   const dataFunction = async () => {
     const movieList = await getMovieDetail(Number(id));
-    console.log("ALL RESPONSES FOR DETAILS", movieList);
     setMovies(movieList);
   };
 
@@ -56,17 +66,21 @@ export default function Page() {
       setTrailerKey(trailerDetails.results[0].key);
     }
   };
-  
+
   const fetchDirector = async () => {
     const directorDetail = await getDirectorDetails(Number(id));
-    console.log("ALL RESPONSES FOR DIRECTORS", directorDetail);
     setDirectorDetail(directorDetail);
+  };
+  const fetchSimiliar = async () => {
+    const similar = await getSimilarMovie(Number(id));
+    setSimilar(similar);
   };
 
   useEffect(() => {
     dataFunction();
     fetchTrailer(Number(id));
     fetchDirector();
+    fetchSimiliar();
   }, []);
 
   function formatRuntime(runtime: number): string {
@@ -74,9 +88,17 @@ export default function Page() {
     const minutes = runtime % 60;
     return `${hours}h ${minutes}m`;
   }
-
+  const directors = directorDetail?.crew
+    ?.filter((member) => member.job === "Director")
+    .slice(0, 3);
+  const writers = directorDetail?.crew
+    ?.filter((member) => member.department === "Writing")
+    .slice(0, 3);
+  const actors = directorDetail?.cast
+    ?.filter((member) => member.known_for_department === "Acting")
+    .slice(0, 5);
   return (
-    <div className="max-w-[1080px] mx-auto px-[20px] mt-[52px] font-inter">
+    <div className="max-w-[1080px] mx-auto px-[20px] mt-[52px] font-manrope">
       <Dialog>
         {movies?.id && (
           <div>
@@ -167,19 +189,60 @@ export default function Page() {
         </DialogContent>
       </Dialog>
       <div className="px-5 lg:px-0">
-          <div className="flex gap-x-[34px] lg:block" >
+        <div className="flex gap-x-[34px] lg:block">
+          <div className="relative overflow-hidden block w-[100px] h-[148px] rounded shrink-0 lg:hidden">
+            <span className="box-border block overflow-hidden w-auto h-auto bg-none opacity-100 border-0 m-0 p-0 absolute inset-0">
+              <Image
+                src={`https://image.tmdb.org/t/p/original${movies?.poster_path}`}
+                alt={movies?.title || "Movie poster"}
+                layout="fill"
+                onClick={() => push(`/detail/${movies?.id}`)}
+                className="absolute inset-0 box-border p-0 border-none m-auto block w-0 h-0 min-w-full max-w-full min-h-full max-h-full object-cover"
+              />
+            </span>
+          </div>
+          <div className="space-y-5 mb-5">
             <div className="flex flex-wrap gap-3">
               <div>Genres here</div>
-              <p>
-              {directorDetail?.crew[5].name}
-              </p>
             </div>
-            <div className="text-base">
-
+            <p className="text-base">{movies?.overview}</p>
+          </div>
+        </div>
+        <div className="space-y-5 text-foreground mb-8">
+          <div className="flex pb-1">
+            <h4 className="font-bold w-16 mr-14">Director</h4>
+            <div className="flex flex-1 flex-wrap">
+              {directors?.map((director, index) => (
+                <p key={index}>&ensp;&#xB7;{director.name}&#xB7;&ensp;</p>
+              ))}
             </div>
           </div>
-          <div className="space-y-5 text-foreground mb-8" ></div>
-          <div className="pb-8 lg:pb-[112.62px]" ></div>
+          <div className="bg-border h-[1px] !mt-0"></div>
+          <div className="flex pb-1">
+            <h4 className="font-bold w-16 mr-14">Writer</h4>
+            <div className="flex flex-1 flex-wrap">
+              {writers?.map((writer, index) => (
+                <p key={index} className="">
+                  {" "}
+                  &ensp;&#xB7;{writer.name}&#xB7;&ensp;
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className="bg-border h-[1px] !mt-0"></div>
+          <div className="flex pb-1">
+            <h4 className="font-bold w-16 mr-14">Stars</h4>
+            <div className="flex flex-1 flex-wrap">
+              {actors?.map((actor, index) => (
+                <p key={index}>&ensp;&#xB7;{actor.name}&#xB7;&ensp;</p>
+              ))}
+            </div>
+          </div>
+          <div className="bg-border h-[1px] !mt-0"></div>
+        </div>
+        <div className="pb-8 lg:pb-[112.62px]">
+          <Similar movies={similar.slice(0, 4)} />
+        </div>
       </div>
     </div>
   );

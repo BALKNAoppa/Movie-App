@@ -53,7 +53,7 @@ export default {
 		
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
+        manrope: ['var(--font-manrope)', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
