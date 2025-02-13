@@ -16,34 +16,33 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+type Movie = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  runtime: number;
+  crew: { 
+    name: string 
+    }[];
+};
+
 export default function Page() {
-  type Movie = {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-    runtime: number;
-    crew: { 
-      name: string 
-      }[];
-  };
-
   const { push } = useRouter();
-
+  const { id } = useParams();
   const [movies, setMovies] = useState<Movie>();
   const [trailerKey, setTrailerKey] = useState<string | null>(null);
   const [directorDetail, setDirectorDetail] = useState<Movie>();
-  const { id } = useParams();
 
   const dataFunction = async () => {
     const movieList = await getMovieDetail(Number(id));
@@ -57,6 +56,7 @@ export default function Page() {
       setTrailerKey(trailerDetails.results[0].key);
     }
   };
+  
   const fetchDirector = async () => {
     const directorDetail = await getDirectorDetails(Number(id));
     console.log("ALL RESPONSES FOR DIRECTORS", directorDetail);

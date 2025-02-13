@@ -20,25 +20,25 @@ import { Button } from "../ui/button";
 import Image from "next/legacy/image";
 import { useRouter } from "next/navigation";
 import { getTraillerData } from "@/utils/geTraillerData";
+type Movie = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
 
 export function NowPlaying() {
   const { push } = useRouter();
-  type Movie = {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-  };
 
   const [movies, setMovies] = useState<Movie[]>([]);
   const [trailerKey, setTrailerKey] = useState<string | null>(null);
@@ -47,16 +47,15 @@ export function NowPlaying() {
     const movieList = await getMovieData("now_playing");
     setMovies(movieList.results);
   };
-  fetchMovies();
   const fetchTrailer = async (movieId: number) => {
     const trailerDetails = await getTraillerData(movieId);
     if (trailerDetails && trailerDetails.results.length > 0) {
       setTrailerKey(trailerDetails.results[0  ].key);
     }
   };
-  console.log("test", getTraillerData);
   
   useEffect(() => {
+    fetchMovies();
   }, []);
   
 
