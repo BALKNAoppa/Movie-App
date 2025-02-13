@@ -71,10 +71,13 @@ export default function Page() {
     const directorDetail = await getDirectorDetails(Number(id));
     setDirectorDetail(directorDetail);
   };
+  console.log("Director data", directorDetail);
+
   const fetchSimiliar = async () => {
     const similar = await getSimilarMovie(Number(id));
     setSimilar(similar);
   };
+  console.log("Similar Data", similar);
 
   useEffect(() => {
     dataFunction();
@@ -212,30 +215,46 @@ export default function Page() {
           <div className="flex pb-1">
             <h4 className="font-bold w-16 mr-14">Director</h4>
             <div className="flex flex-1 flex-wrap">
-              {directors?.map((director, index) => (
-                <p key={index}>&ensp;&#xB7;{director.name}&#xB7;&ensp;</p>
-              ))}
+              {directors && directors.length > 0 ? (
+                directors.map((director, index) => (
+                  <p key={index}>
+                    &ensp;&#xB7;&ensp;{director.name}&ensp;&#xB7;&ensp;
+                  </p>
+                ))
+              ) : (
+                <p>Unknown</p>
+              )}
             </div>
           </div>
           <div className="bg-border h-[1px] !mt-0"></div>
           <div className="flex pb-1">
             <h4 className="font-bold w-16 mr-14">Writer</h4>
             <div className="flex flex-1 flex-wrap">
-              {writers?.map((writer, index) => (
-                <p key={index} className="">
-                  {" "}
-                  &ensp;&#xB7;{writer.name}&#xB7;&ensp;
-                </p>
-              ))}
+              {writers && writers.length > 0 ? (
+                writers.map((writer, index) => (
+                  <p key={index} className="">
+                    {" "}
+                    &ensp;&#xB7;&ensp;{writer.name}&ensp;&#xB7;&ensp;
+                  </p>
+                ))
+              ) : (
+                <p>Unknown</p>
+              )}
             </div>
           </div>
           <div className="bg-border h-[1px] !mt-0"></div>
           <div className="flex pb-1">
             <h4 className="font-bold w-16 mr-14">Stars</h4>
             <div className="flex flex-1 flex-wrap">
-              {actors?.map((actor, index) => (
-                <p key={index}>&ensp;&#xB7;{actor.name}&#xB7;&ensp;</p>
-              ))}
+              {actors && actors.length > 0 ? (
+                actors.map((actor, index) => (
+                  <p key={index}>
+                    &ensp;&#xB7;&ensp;{actor.name}&ensp;&#xB7;&ensp;
+                  </p>
+                ))
+              ) : (
+                <p>&ensp;&#xB7;&ensp;Unknown&ensp;&#xB7;&ensp;</p>
+              )}
             </div>
           </div>
           <div className="bg-border h-[1px] !mt-0"></div>

@@ -23,7 +23,6 @@ const Header = () => {
         <Link
           href="/"
           className="flex items-center gap-x-2 text-indigo-700 cursor-pointer"
-          onClick={() => window.location.reload()}
         >
           <Film className="w-5 h-5" />
           <h4 className="font-bold italic">Movie Z</h4>

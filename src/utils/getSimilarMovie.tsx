@@ -15,6 +15,8 @@ export const getSimilarMovie = async (id: number) => {
         },
       }
     );
+    console.log("TEEST", response.data.results);
+    
     return response.data.results;
   } catch (error) {
     console.log(" Similar Axios Error shuu", error);
