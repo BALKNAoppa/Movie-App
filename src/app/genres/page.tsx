@@ -10,10 +10,9 @@ import { getMovieGenreDetails } from "@/utils/getMovieGenreDetails";
 type GenresType = {
   id: number;
   name: string;
-  console.log(moviesByGenres);
 };
 type Movie = {
-    original_title: string;
+  original_title: string;
 };
 
 const Genres = () => {
@@ -29,14 +28,16 @@ const Genres = () => {
   };
 
   const fetchMoviesByGenres = async () => {
-    const moviesByGenres = await getMovieGenreDetails();
-    console.log("ALL RESPONCES FOR GENRES", moviesByGenres);
-    setMovies(moviesByGenres.genres);
-  console.log("MoveisGenres", moviesByGenres);
-  
+    if (selectedGenreIds.length === 0) return;
+    const genreId = Number(selectedGenreIds[0]);
+    const moviesByGenres = await getMovieGenreDetails(genreId, 1);
 
+    console.log("Movies by Genre", moviesByGenres);
+    setMovies(moviesByGenres.results);
+  };
   useEffect(() => {
     fetchGenres();
+    fetchMoviesByGenres();
   }, []);
 
   const handleGenresSelection = (genresId: string) => () => {
@@ -56,14 +57,14 @@ const Genres = () => {
     <div className="w-full grid grid-cols-3 gap-2 h-screen">
       <div className="col-span-1 space-x-2">
         {genres?.length > 0 &&
-          genres?.map((item) => {
+          genres.map((item) => {
             const genreId = item.id.toString();
             const isSelected = selectedGenreIds.includes(genreId);
             return (
               <Badge
                 onClick={handleGenresSelection(genreId)}
                 variant="outline"
-                key={item.name}
+                key={item.id}
                 className={`${
                   isSelected
                     ? "bg-black text-white focus:outline-2 focus:outline-offset-2 dark:bg-white dark:text-black"
@@ -76,8 +77,14 @@ const Genres = () => {
           })}
       </div>
       <Separator orientation="vertical" />
-      <div className="col-span-2">Movies</div>
+      <div className="col-span-2">
+        Movies:
+        {movies.map((m, i) => (
+          <p key={i}>{m.original_title}</p>
+        ))}
+      </div>
     </div>
   );
 };
+
 export default Genres;
