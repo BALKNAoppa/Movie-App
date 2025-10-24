@@ -14,12 +14,9 @@ export const getMovieGenres = async () => {
         },
       }
     );
-    console.log("Genre api response",response);
-    
+
     return response.data;
   } catch (error) {
-    console.log("Axios Error shuu", error);
     return error;
   }
 };
-

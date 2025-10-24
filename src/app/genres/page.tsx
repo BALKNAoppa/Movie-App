@@ -23,7 +23,6 @@ const Genres = () => {
 
   const fetchGenres = async () => {
     const genreList = await getMovieGenres();
-    console.log("ALL RESPONCES FOR GENRES", genreList);
     setGenres(genreList.genres);
   };
 
@@ -31,8 +30,6 @@ const Genres = () => {
     if (selectedGenreIds.length === 0) return;
     const genreId = Number(selectedGenreIds[0]);
     const moviesByGenres = await getMovieGenreDetails(genreId, 1);
-
-    console.log("Movies by Genre", moviesByGenres);
     setMovies(moviesByGenres.results);
   };
   useEffect(() => {

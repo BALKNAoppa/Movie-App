@@ -4,8 +4,7 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
 
 export const getSimilarMovie = async (id: number) => {
-
-    try {
+  try {
     const response = await axios.get(
       `${TMDB_BASE_URL}//movie/${id}/similar?language=en-US&page=1`,
       {
@@ -15,11 +14,9 @@ export const getSimilarMovie = async (id: number) => {
         },
       }
     );
-    console.log("TEEST", response.data.results);
-    
+
     return response.data.results;
   } catch (error) {
-    console.log(" Similar Axios Error shuu", error);
     return error;
   }
 };

@@ -71,13 +71,11 @@ export default function Page() {
     const directorDetail = await getDirectorDetails(Number(id));
     setDirectorDetail(directorDetail);
   };
-  console.log("Director data", directorDetail);
 
   const fetchSimiliar = async () => {
     const similar = await getSimilarMovie(Number(id));
     setSimilar(similar);
   };
-  console.log("Similar Data", similar);
 
   useEffect(() => {
     dataFunction();

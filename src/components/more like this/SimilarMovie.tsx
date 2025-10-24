@@ -27,11 +27,10 @@ type SimilarProps = {
 
 export function Similar({ id }: SimilarProps) {
   const [similar, setSimilar] = useState<Movie[]>([]);
-    const fetchSimilar = async () => {
-      const similarMovie = await getSimilarMovie(Number(id));
-      console.log("ALL RESPONSES FOR DIRECTORS", similarMovie);
-      setSimilar(similarMovie);
-    };
+  const fetchSimilar = async () => {
+    const similarMovie = await getSimilarMovie(Number(id));
+    setSimilar(similarMovie);
+  };
   useEffect(() => {
     fetchSimilar();
   }, []);

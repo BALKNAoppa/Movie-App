@@ -14,11 +14,8 @@ export const getCategoryMovieData = async (segment: string) => {
         },
       }
     );
-    console.log("TEST",response);
-    
     return response.data;
   } catch (error) {
-    console.log("Axios Error shuu", error);
     return error;
   }
 };

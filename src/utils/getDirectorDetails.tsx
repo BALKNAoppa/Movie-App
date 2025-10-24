@@ -4,7 +4,7 @@ const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
 
 export const getDirectorDetails = async (id: number) => {
-    try {
+  try {
     const response = await axios.get(
       `${TMDB_BASE_URL}//movie/${id}/credits?language=en-US`,
       {
@@ -14,10 +14,9 @@ export const getDirectorDetails = async (id: number) => {
         },
       }
     );
-    
+
     return response.data;
   } catch (error) {
-    console.log("Axios Error shuu", error);
     return error;
   }
 };

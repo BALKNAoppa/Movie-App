@@ -28,7 +28,6 @@ export function UpComing() {
   useEffect(() => {
     const dataFunction = async () => {
       const movieList = await getMovieData("upcoming");
-      console.log("ALL RESPONCES FOR UPCOMING", movieList);
       setMovies(movieList.results);
     };
     dataFunction();
